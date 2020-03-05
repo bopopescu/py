@@ -47,9 +47,12 @@ def ShowMenu():
         ShowPersonajes()
         id = input("Introduce la id del Personaje a modificar")
         update(id)
+        time.sleep(10)
+        ShowMenu()
+    if sel == "5":
+        print("Que la fuerza te acompañe")
 
-
-ShowMenu()
+    ShowMenu()
 
 
 def main():
