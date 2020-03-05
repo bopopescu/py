@@ -1,7 +1,6 @@
 #!/usr/bin/python
 from mysql.connector import MySQLConnection, Error
 
-from Ejercicio.Query import query_with_fetchone as showTable
 from Ejercicio.python_mysql_dbconfig import read_db_config
 
 
@@ -42,7 +41,6 @@ def insert_persona():
 
 
 def DeleteById():
-    showTable()
     id = input("Introduce una id")
     try:
         dbconfig = read_db_config()
@@ -56,10 +54,9 @@ def DeleteById():
     finally:
         cursor.close()
         conn.close()
-#TODO modificar  la query
-def UpdateById(id):
-    showTable()
 
+
+def UpdateById(id):
     try:
         nombre = input("Introduce el nuevo nombre")
         age = input("Introduce la edad")
@@ -67,15 +64,16 @@ def UpdateById(id):
         conn = MySQLConnection(**dbconfig)
         cursor = conn.cursor()
         # cursor.execute("select" + selectString+" from "+fromString+";")
-        cursor.execute("update persona "
-                       "set name= nombre , set edad = age  where id = " + id)
+        cursor.execute("update persona"
+                       " set name= '" + nombre + " ' ,"
+                                                 " edad =  '" + age +
+                       "'  where id = " + id)
         conn.commit()
     except Error as error:
         print(error)
     finally:
         cursor.close()
         conn.close()
-
 
 
 class DBMethods:
